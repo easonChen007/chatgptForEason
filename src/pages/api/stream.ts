@@ -32,7 +32,15 @@ export const post: APIRoute = async context => {
     return new Response("没有输入任何文字")
   }
 
-  const RequestInit = {
+  const RequestInit: {
+    headers: {
+      "Content-Type": string;
+      Authorization: string;
+    };
+    method: string;
+    body: string;
+    dispatcher?: any;
+  } = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`

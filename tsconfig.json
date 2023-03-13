@@ -1,6 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    //"module": "nodenext",
+    "types": ["./src/env"],
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "baseUrl": ".",
