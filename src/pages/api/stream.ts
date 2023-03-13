@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro"
+import { fetch, ProxyAgent } from 'undici'
 import {
   createParser,
   ParsedEvent,
@@ -7,6 +8,7 @@ import {
 
 const localEnv = import.meta.env.OPENAI_API_KEY
 const vercelEnv = process.env.OPENAI_API_KEY
+const https_proxy = import.meta.env.HTTPS_PROXY
 
 const apiKeys = ((localEnv || vercelEnv)?.split(/\s*\|\s*/) ?? []).filter(
   Boolean
@@ -30,7 +32,7 @@ export const post: APIRoute = async context => {
     return new Response("没有输入任何文字")
   }
 
-  const completion = await fetch("https://api.openai.com/v1/chat/completions", {
+  const RequestInit = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`
@@ -42,7 +44,13 @@ export const post: APIRoute = async context => {
       temperature,
       stream: true
     })
-  })
+  }
+
+  if (https_proxy) {
+    RequestInit['dispatcher'] = new ProxyAgent(https_proxy)
+  }
+
+  const completion = await fetch("https://api.openai.com/v1/chat/completions", RequestInit)
 
   const stream = new ReadableStream({
     async start(controller) {
