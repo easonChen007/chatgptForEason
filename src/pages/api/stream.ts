@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro"
-import { fetch, ProxyAgent } from 'undici'
+// if (process.env.NODE_ENV === 'dev') {
+//   import { fetch, ProxyAgent } from 'undici'
+// }
 import {
   createParser,
   ParsedEvent,
@@ -55,7 +57,11 @@ export const post: APIRoute = async context => {
   }
 
   if (https_proxy) {
-    RequestInit['dispatcher'] = new ProxyAgent(https_proxy)
+    if (process.env.NODE_ENV === 'dev') {
+      import('undici').then(({ fetch, ProxyAgent }) => {
+        RequestInit['dispatcher'] = new ProxyAgent(https_proxy)
+      })
+    } 
   }
 
   const completion = await fetch("https://api.openai.com/v1/chat/completions", RequestInit)
