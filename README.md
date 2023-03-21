@@ -3,7 +3,7 @@
 ![](assets/preview-light.png#gh-light-mode-only)
 ![](assets/preview-dark.png#gh-dark-mode-only)
 
-> 本项目基于 [chatgpt-demo](https://github.com/ddiu8081/chatgpt-demo) 开发。
+> 这个应用只对新技术touch,不承担任何使用后涉及政治、法律责任，基于 [chatgpt-vercel](https://github.com/ourongxing/chatgpt-vercel) 开发，欢迎自部署。
 
 预览:
 1. [aitoolgpt.com](https://www.aitoolgpt.com)，由 [@AUDI_GUZZ](https://m.okjike.com/users/4af3cfb4-1291-4a8b-b210-f515c86934a9) 免费提供。
