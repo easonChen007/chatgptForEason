@@ -22,10 +22,10 @@ async function loadLeancloudStorageCore() {
     AVInstance = AV;
   }
 
-  const { Query, User } = AVInstance;
+  const { User } = AVInstance;
   const HumanRequst = AVInstance.Object.extend("HumanRequst");
 
-  return { AV: AVInstance, Query, User, HumanRequst };
+  return { AV: AVInstance, User, HumanRequst };
 }
 
 export const post: APIRoute = async (context) => {
