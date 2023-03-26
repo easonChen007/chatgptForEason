@@ -23,6 +23,7 @@
     "html-to-image": "^1.11.11",
     "just-throttle": "^4.2.0",
     "katex": "^0.6.0",
+    "leancloud-storage": "^4.14.0",
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-katex": "^2.0.3",

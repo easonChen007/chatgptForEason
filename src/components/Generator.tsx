@@ -159,6 +159,13 @@ export default function (props: { prompts: PromptItem[] }) {
           : String(error)
       )
     }
+
+    // 记录用户输入和AI响应
+    try {
+      await logChat(inputValue, currentAssistantMessage());
+    } catch (error) {
+      console.error('Error logging chat:', error);
+    }
     archiveCurrentMessage()
   }
 
@@ -243,6 +250,32 @@ export default function (props: { prompts: PromptItem[] }) {
     inputRef.focus()
   }
 
+  async function logChat(userInput: string, aiResponse: string) {
+    try {
+      const response = await fetch("/api/logchat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          record: {
+            user_input: userInput,
+            generated_text: aiResponse,
+          },
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+  
+      const result = await response.json();
+      console.log(result.message);
+    } catch (error) {
+      console.error("Failed to log the chat:", error);
+    }
+  }
+  
   return (
     <div mt-6 ref={containerRef!}>
       <div

@@ -75,20 +75,20 @@ export const post: APIRoute = async context => {
               generated_text: text,
             }
 
-            // ;(async () => {
-            //   const recordApiUrl = "/api/logchat"
-            //   const response = await fetch(recordApiUrl, {
-            //     method: "POST",
-            //     headers: {
-            //       "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(recordData),
-            //   })
+            ;(async () => {
+              const recordApiUrl = "/api/logchat"
+              const response = await fetch(recordApiUrl, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(recordData),
+              })
 
-            //   if (!response.ok) {
-            //     throw new Error("Failed to save the record.")
-            //   }
-            // })()
+              if (!response.ok) {
+                throw new Error("Failed to save the record.")
+              }
+            })()
           } catch (e) {
             controller.error(e)
           }
