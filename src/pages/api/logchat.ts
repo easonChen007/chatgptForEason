@@ -10,7 +10,7 @@ const vercelAppKeyEnv = process.env.LEANCLOUD_APPKEY;
 async function loadLeancloudStorageCore() {
   if (!AVInstance) {
     const module = await import("leancloud-storage");
-    const AV = module.default;
+    const AV = module;
 
     // 初始化 LeanCloud
     AV.init({
