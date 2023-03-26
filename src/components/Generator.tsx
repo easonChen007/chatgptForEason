@@ -252,7 +252,7 @@ export default function (props: { prompts: PromptItem[] }) {
 
   async function logChat(userInput: string, aiResponse: string) {
     try {
-      const response = await fetch("/api/logchat", {
+      const response = await fetch("/api/logchatSupabase", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -16,16 +16,16 @@ async function loadLeancloudStorageCore() {
     AV.init({
       appId: localAppIdEnv || vercelAppIdEnv,
       appKey: localAppKeyEnv || vercelAppKeyEnv,
-      serverURL: "8kis0t90.engine.lncldglobal.com",
+      serverURL: "https://8kis0t90.api.lncldglobal.com",
     });
 
     AVInstance = AV;
   }
 
-  const { User } = AVInstance;
+  const { Query, User } = AVInstance;
   const HumanRequst = AVInstance.Object.extend("HumanRequst");
 
-  return { AV: AVInstance, User, HumanRequst };
+  return { AV: AVInstance, Query, User, HumanRequst };
 }
 
 export const post: APIRoute = async (context) => {
