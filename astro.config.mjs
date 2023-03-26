@@ -15,6 +15,7 @@ export default defineConfig({
   vite: {
     build: {
       chunkSizeWarningLimit: 1000, // 设置警告限制为 800 KB
+      minify: false, // 禁用压缩
       rollupOptions: {
         output: {
           manualChunks(id) {
