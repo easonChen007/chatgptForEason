@@ -16,7 +16,7 @@ async function loadLeancloudStorageCore() {
     AV.init({
       appId: localAppIdEnv || vercelAppIdEnv,
       appKey: localAppKeyEnv || vercelAppKeyEnv,
-      serverURL: "https://8kis0t90.api.lncldglobal.com",
+      serverURL: "8kis0t90.engine.lncldglobal.com",
     });
 
     AVInstance = AV;
