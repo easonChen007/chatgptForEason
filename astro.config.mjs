@@ -22,6 +22,7 @@ export default defineConfig({
               const arr = id.toString().split("node_modules/")[1].split("/")
               if (arr[1].includes("markdown")) return "__markdown"
               if (arr[1].includes("highlight")) return "__highlight"
+              if (arr[1].includes('leancloud-storage')) return '__leancloud-storage'
               return "__vendor"
             }
           }
