@@ -1,25 +1,38 @@
 import type { APIRoute } from "astro";
-import AV from "leancloud-storage";
 
-const { Query, User } = AV;
+let AVInstance: any;
 
-// 声明 class
-const HumanRequst = AV.Object.extend("HumanRequst");
-const localAppIdEnv = import.meta.env.LEANCLOUD_APPID
-const vercelAppIdEnv = process.env.LEANCLOUD_APPID
-const localAppKeyEnv = import.meta.env.LEANCLOUD_APPKEY
-const vercelAppKeyEnv = process.env.LEANCLOUD_APPKEY
+const localAppIdEnv = import.meta.env.LEANCLOUD_APPID;
+const vercelAppIdEnv = process.env.LEANCLOUD_APPID;
+const localAppKeyEnv = import.meta.env.LEANCLOUD_APPKEY;
+const vercelAppKeyEnv = process.env.LEANCLOUD_APPKEY;
 
-// 初始化 LeanCloud
-AV.init({
-  appId: localAppIdEnv || vercelAppIdEnv,
-  appKey: localAppKeyEnv || vercelAppKeyEnv,
-  serverURL: "https://8kis0t90.api.lncldglobal.com",
-});
+async function loadLeancloudStorageCore() {
+  if (!AVInstance) {
+    const module = await import("leancloud-storage");
+    const AV = module.default;
+
+    // 初始化 LeanCloud
+    AV.init({
+      appId: localAppIdEnv || vercelAppIdEnv,
+      appKey: localAppKeyEnv || vercelAppKeyEnv,
+      serverURL: "https://8kis0t90.api.lncldglobal.com",
+    });
+
+    AVInstance = AV;
+  }
+
+  const { Query, User } = AVInstance;
+  const HumanRequst = AVInstance.Object.extend("HumanRequst");
+
+  return { AV: AVInstance, Query, User, HumanRequst };
+}
 
 export const post: APIRoute = async (context) => {
   const body = await context.request.json();
-  const record = body.record; // 获取前端记录
+  const record = body.record;
+
+  const { AV, HumanRequst } = await loadLeancloudStorageCore();
 
   const stream = new ReadableStream({
     async start(controller) {

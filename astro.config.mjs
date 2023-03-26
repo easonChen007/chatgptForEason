@@ -33,7 +33,7 @@ export default defineConfig({
       }
     },
     optimizeDeps: {
-      exclude: ["leancloud-storage/av-live*"], // 根据实际文件路径排除 a.js
+      exclude: ["av-live*"], // 根据实际文件路径排除 a.js
     },
 
   },
