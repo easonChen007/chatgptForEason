@@ -10,9 +10,11 @@ import {
 import solidJs from "@astrojs/solid-js"
 
 // https://astro.build/config
+
 export default defineConfig({
   vite: {
     build: {
+      chunkSizeWarningLimit: 1000, // 设置警告限制为 800 KB
       rollupOptions: {
         output: {
           manualChunks(id) {
