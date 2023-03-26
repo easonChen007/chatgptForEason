@@ -18,11 +18,14 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks(id) {
+            if (id.includes("av")) {
+              return '__leancloud'
+            }
             if (id.includes("node_modules")) {
               const arr = id.toString().split("node_modules/")[1].split("/")
               if (arr[1].includes("markdown")) return "__markdown"
               if (arr[1].includes("highlight")) return "__highlight"
-              if (arr[1].includes('leancloud')) return '__leancloud'
+              //if (arr[1].includes('leancloud-storage')) return '__leancloud'
               return "__vendor"
             }
           }
